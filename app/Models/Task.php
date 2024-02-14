@@ -3,21 +3,24 @@
 namespace App\Models;
 
 use App\Enums\TaskStatusesEnum;
+use App\Traits\DefaultTaskValues;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Task extends Model {
 
-    use HasFactory;
+    use HasFactory, DefaultTaskValues;
 
-    protected $collection = 'tasks';
+    public $timestamps = true;
 
     protected $fillable = [
         'username',
         'email',
         'text',
         'status',
-        'edited_by_admin'
+        'edited_by_admin',
+        'created_at',
+        'updated_at'
     ];
 
     protected $casts = [
