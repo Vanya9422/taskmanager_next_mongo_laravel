@@ -25,6 +25,6 @@ class Task extends Model {
 
     protected $casts = [
         'edited_by_admin' => 'boolean',
-        'status' => TaskStatusesEnum::class,
+        'status' => TaskStatusesEnum::class
     ];
 }
