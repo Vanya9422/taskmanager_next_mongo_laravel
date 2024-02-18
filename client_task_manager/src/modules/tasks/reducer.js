@@ -6,6 +6,7 @@ import {
     FETCH_STATUSES_REQUEST,
     FETCH_STATUSES_SUCCESS,
     FETCH_STATUSES_FAILURE,
+    CREATE_TASK_SUCCESS, // Убедитесь, что действие импортировано
 } from './actions';
 
 const initialState = {
@@ -42,6 +43,12 @@ const tasksReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload,
+            };
+        case CREATE_TASK_SUCCESS:
+            return {
+                ...state,
+                tasks: [...state.tasks, action.payload], // Добавляем новую задачу в массив задач
+                loading: false,
             };
         default:
             return state;
