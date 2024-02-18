@@ -3,20 +3,17 @@
 namespace App\Repository;
 
 use App\Exceptions\Repository\RepositoryException;
-use App\Repository\Contracts\CriteriaContract;
-use App\Repository\Contracts\RepositoryCriteriaContract;
 use App\Repository\Contracts\RepositoryInterface;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 /**
  * Базовый класс репозитория, который определяет основные операции,
  * которые должны быть реализованы в наследуемых репозиториях.
  */
-abstract class BaseRepository implements RepositoryInterface, RepositoryCriteriaContract
+abstract class BaseRepository implements RepositoryInterface
 {
     /**
      * @var Application Контейнер приложения, используется для резолва моделей и других зависимостей.
@@ -26,23 +23,12 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     protected $model;
 
     /**
-     * @var Collection Коллекция объектов критериев, которые могут быть применены к запросу.
-     */
-    protected Collection $criteria;
-
-    /**
-     * @var bool Флаг, указывающий, следует ли пропускать применение критериев к запросу.
-     */
-    protected bool $skipCriteria = false;
-
-    /**
      * @param Application $app
      * @throws RepositoryException
      * @throws BindingResolutionException
      */
     public function __construct(Application $app) {
         $this->app = $app;
-        $this->criteria = new Collection();
         $this->makeModel();
         $this->boot();
     }
@@ -113,55 +99,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         }
 
         return $this->model = $model;
-    }
-
-    /**
-     * Добавляет критерий в коллекцию.
-     *
-     * @param CriteriaContract $criteria Критерий, который нужно добавить.
-     * @return $this
-     */
-    public function pushCriteria($criteria): static {
-        $this->criteria->push($criteria);
-
-        return $this;
-    }
-
-    /**
-     * Добавляет критерий в коллекцию и сразу же применяет его к запросу.
-     * Это позволяет немедленно внести изменения в построение запроса,
-     * основываясь на добавленных критериях, что может быть полезно
-     * для динамической модификации запроса перед выполнением.
-     *
-     * @param CriteriaContract $criteria Критерий, который нужно добавить к запросу.
-     * @return $this Возвращает текущий экземпляр репозитория для цепочечных вызовов.
-     */
-    public function pushCriteriaWithApply(CriteriaContract $criteria): static {
-
-        // Добавление критерия в коллекцию
-        $this->criteria->push($criteria);
-
-        // Применение всех критериев, включая только что добавленный,
-        // к текущему построителю запросов
-        $this->applyCriteria();
-
-        // Возвращение текущего экземпляра репозитория
-        return $this;
-    }
-
-    /**
-     * Применяет все критерии к текущему запросу.
-     *
-     * @return $this
-     */
-    protected function applyCriteria(): static {
-        if ($this->skipCriteria === true) return $this;
-
-        foreach ($this->criteria as $criteria)
-            if ($criteria instanceof CriteriaContract)
-                $this->model = $criteria->apply($this->model, $this);
-
-        return $this;
     }
 
     /**
