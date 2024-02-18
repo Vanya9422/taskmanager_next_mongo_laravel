@@ -19,7 +19,9 @@ class TaskFactory extends Factory
         return [
             'username' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'text' => $this->faker->realText
+            'text' => $this->faker->realText,
+            'status' => $this->faker->randomElement([0, 1, 2]),
+            'edited_by_admin' => $this->faker->boolean
         ];
     }
 }

@@ -1,0 +1,28 @@
+{
+  "name": "client_task_manager",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.4",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-redux": "^9.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "mini-css-extract-plugin": "^2.8.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}

@@ -7,9 +7,9 @@ use App\Http\Requests\ApiFormRequest;
 class StoreTaskRequest extends ApiFormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
+     * Получите правила проверки, применимые к запросу..
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array
      */
     public function rules(): array
     {

@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 /**
  * Перечисление для определения статусов задачи.
  *
@@ -15,7 +17,19 @@ namespace App\Enums;
  */
 enum TaskStatusesEnum: int
 {
+    use EnumTrait;
+
     case NEW = 0; // Новая Задача - это начальное состояние для вновь созданных задач.
     case IN_PROGRESS = 1; // В Процессе - статус, указывающий на то, что работа над задачей ведётся.
     case COMPLETED = 2; // Завершено - статус для задач, которые были выполнены.
+
+
+    public static function getDescription($value): string {
+        return match ($value) {
+            self::NEW => 'Новая',
+            self::IN_PROGRESS => 'В процессе',
+            self::COMPLETED => 'Завершена',
+            default => '',
+        };
+    }
 }

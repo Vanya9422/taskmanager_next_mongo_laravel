@@ -2,11 +2,6 @@
 
 namespace App\Traits;
 
-/**
- * Trait EnumTrait
- *
- * Общий трейт для перечислений (enums), предоставляющий удобные методы для работы с ними.
- */
 trait EnumTrait
 {
     /**
@@ -16,7 +11,7 @@ trait EnumTrait
      */
     public static function getValues(): array
     {
-        return array_values(self::toArray());
+        return array_map(fn($case) => $case->value, static::cases());
     }
 
     /**
@@ -26,7 +21,7 @@ trait EnumTrait
      */
     public static function getKeys(): array
     {
-        return array_keys(self::toArray());
+        return array_map(fn($case) => $case->name, static::cases());
     }
 
     /**
@@ -37,17 +32,17 @@ trait EnumTrait
      */
     public static function isValidValue($value): bool
     {
-        return in_array($value, self::getValues(), true);
+        return in_array($value, static::getValues(), true);
     }
 
     /**
      * Метод для проверки, существует ли заданный ключ в перечислении.
      *
-     * @param mixed $key Ключ, который необходимо проверить.
+     * @param string $key Ключ, который необходимо проверить.
      * @return bool Возвращает true, если ключ существует в перечислении, иначе false.
      */
-    public static function isValidKey($key): bool
+    public static function isValidKey(string $key): bool
     {
-        return in_array($key, self::getKeys(), true);
+        return in_array($key, static::getKeys(), true);
     }
 }
