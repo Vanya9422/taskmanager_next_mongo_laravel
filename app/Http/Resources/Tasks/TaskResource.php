@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $username
  * @property string $email
  * @property string $text

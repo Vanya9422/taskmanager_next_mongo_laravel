@@ -7,7 +7,13 @@ import { useForm } from "@~components/Tasks/useForm";
 
 const CreateTaskForm = () => {
     const dispatch = useDispatch();
-    const { formData, handleChange, errors, validateForm, setFormData } = useForm({
+    const {
+        formData,
+        handleChange,
+        errors,
+        validateForm,
+        setFormData
+    } = useForm({
         username: '',
         email: '',
         text: ''
