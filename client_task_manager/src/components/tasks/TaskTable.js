@@ -1,5 +1,5 @@
 // TaskTable.js
-import TaskRow from "@~components/Tasks/TaskRow"; // Убедитесь, что путь импорта корректен
+import TaskRow from "@~components/tasks/TaskRow"; // Убедитесь, что путь импорта корректен
 
 const TaskTable = ({ tasks }) => (
     <table className="table-auto w-full">

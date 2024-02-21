@@ -1,5 +1,6 @@
 // tasks/actions.js
 import API from "@~utils/axios"
+import axios from "axios";
 
 // Типы действий для управления состоянием запросов и данных задач
 export const CREATE_TASK_REQUEST = 'CREATE_TASK_REQUEST';
@@ -42,7 +43,7 @@ export const fetchTasks = (params = {}) => async dispatch => {
 export const fetchStatuses = () => async dispatch => {
     dispatch(createAction(FETCH_STATUSES_REQUEST));
     try {
-        const { data: { data: { statuses } } } = await API.options('tasks');
+        const { data: { data: { statuses } } } = await API.options('tasks', );
         dispatch(createAction(FETCH_STATUSES_SUCCESS, { payload: statuses }));
     } catch (error) {
         dispatch(createAction(FETCH_STATUSES_FAILURE, { payload: error.message }));
@@ -50,12 +51,19 @@ export const fetchStatuses = () => async dispatch => {
 };
 
 // Асинхронный создатель действий для создания новой задачи
-export const createTask = (taskData) => async dispatch => {
+export const createTask = (taskData, onSuccess, onError) => async dispatch => {
     dispatch(createAction(CREATE_TASK_REQUEST));
+
     try {
         const { data: { data } } = await API.post('tasks', taskData);
         dispatch(createAction(CREATE_TASK_SUCCESS, { payload: data }));
+        if (onSuccess) {
+            onSuccess(data);
+        }
     } catch (error) {
         dispatch(createAction(CREATE_TASK_FAILURE, { payload: error.message }));
+        if (onError) {
+            onError(error.message);
+        }
     }
 };

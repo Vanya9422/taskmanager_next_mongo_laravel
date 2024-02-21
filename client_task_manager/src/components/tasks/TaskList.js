@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasks, fetchStatuses } from '@~modules/tasks/actions';
-import TaskTable from "@~components/Tasks/TaskTable";
-import Pagination from "@~components/Tasks/Pagination";
-import TaskFilters from "@~components/Tasks/TaskFilters";
+import TaskTable from "@~components/tasks/TaskTable";
+import Pagination from "@~components/tasks/Pagination";
+import TaskFilters from "@~components/tasks/TaskFilters";
 
 import {
     selectTasks,

@@ -6,7 +6,7 @@ import {
     FETCH_STATUSES_REQUEST,
     FETCH_STATUSES_SUCCESS,
     FETCH_STATUSES_FAILURE,
-    CREATE_TASK_SUCCESS, // Убедитесь, что действие импортировано
+    CREATE_TASK_SUCCESS,
 } from './actions';
 
 const initialState = {

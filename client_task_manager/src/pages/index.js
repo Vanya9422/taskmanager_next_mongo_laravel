@@ -1,17 +1,12 @@
-// index.js
+// pages/index.js
 import React from 'react';
-import { Provider } from 'react-redux';
-import { useStore } from '@~store/storeHook';
-import App from "@~App";
+import TaskList from "@~components/tasks/TaskList";
 
-const HomePage = () => {
-    const store = useStore(); // Инициализируйте ваш Redux store здесь
-
+export default function HomePage() {
     return (
-        <Provider store={store}>
-            <App />
-        </Provider>
+       <>
+           <h1 className="text-2xl font-bold">Список задач</h1>
+           <TaskList />
+       </>
     );
-};
-
-export default HomePage;
+}
