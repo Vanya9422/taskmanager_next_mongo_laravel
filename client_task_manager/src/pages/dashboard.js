@@ -1,4 +1,4 @@
-import withAuth from "@~utils/withAuth";
+import withAuth from "@~hooks/withAuth";
 import React from "react";
 
 const Dashboard = () => {

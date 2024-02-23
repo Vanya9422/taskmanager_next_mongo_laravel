@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Tasks;
+namespace App\Http\Controllers\Api\Client\Tasks;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tasks\TasksListTasksRequest;
+use App\Http\Requests\Client\Tasks\TasksListTasksRequest;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Repository\Tasks\TaskRepositoryInterface;
 use Illuminate\Http\JsonResponse;

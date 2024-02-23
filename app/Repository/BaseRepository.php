@@ -109,4 +109,33 @@ abstract class BaseRepository implements RepositoryInterface
     public function create(array $attributes): Model {
         return $this->startQuery()->create($attributes);
     }
+
+    /**
+     * Обновляет сущность в репозитории по её идентификатору.
+     *
+     * @param int|string $id Идентификатор сущности.
+     * @param array $attributes Атрибуты для обновления.
+     * @return Model
+     * @throws RepositoryException
+     */
+    public function update(int|string $id, array $attributes): Model {
+        $model = $this->find($id);
+        if ($model) {
+            $model->fill($attributes);
+            $model->save();
+            return $model;
+        }
+
+        throw new RepositoryException("Модель не найдена.");
+    }
+
+    /**
+     * Находит сущность по идентификатору.
+     *
+     * @param int|string $id Идентификатор сущности.
+     * @return Model|null
+     */
+    public function find(int|string $id): ?Model {
+        return $this->startQuery()->find($id);
+    }
 }

@@ -1,6 +1,5 @@
 // tasks/actions.js
-import API from "@~utils/axios"
-import axios from "axios";
+import {API, API_ADMIN} from "@~utils/axios"
 
 // Типы действий для управления состоянием запросов и данных задач
 export const CREATE_TASK_REQUEST = 'CREATE_TASK_REQUEST';
@@ -14,6 +13,11 @@ export const FETCH_STATUSES_FAILURE = 'FETCH_STATUSES_FAILURE';
 export const FETCH_TASKS_REQUEST = 'FETCH_TASKS_REQUEST';
 export const FETCH_TASKS_SUCCESS = 'FETCH_TASKS_SUCCESS';
 export const FETCH_TASKS_FAILURE = 'FETCH_TASKS_FAILURE';
+
+export const UPDATE_TASK_REQUEST = 'UPDATE_TASK_REQUEST';
+export const UPDATE_TASK_SUCCESS = 'UPDATE_TASK_SUCCESS';
+export const UPDATE_TASK_FAILURE = 'UPDATE_TASK_FAILURE';
+
 
 // Вспомогательная функция для создания объектов действий
 const createAction = (type, payload = {}) => ({ type, ...payload });
@@ -51,19 +55,29 @@ export const fetchStatuses = () => async dispatch => {
 };
 
 // Асинхронный создатель действий для создания новой задачи
-export const createTask = (taskData, onSuccess, onError) => async dispatch => {
+export const createTask = (taskData) => async dispatch => {
     dispatch(createAction(CREATE_TASK_REQUEST));
+    return API.post('tasks', taskData) // Возвращаем промис напрямую
+        .then(({ data }) => {
+            dispatch(createAction(CREATE_TASK_SUCCESS, { payload: data }));
+            return data; // Разрешаем промис с данными для дальнейшего использования
+        })
+        .catch(error => {
+            dispatch(createAction(CREATE_TASK_FAILURE, { payload: error.message }));
+            throw error; // Передаём ошибку дальше по цепочке промисов
+        });
+};
 
-    try {
-        const { data: { data } } = await API.post('tasks', taskData);
-        dispatch(createAction(CREATE_TASK_SUCCESS, { payload: data }));
-        if (onSuccess) {
-            onSuccess(data);
-        }
-    } catch (error) {
-        dispatch(createAction(CREATE_TASK_FAILURE, { payload: error.message }));
-        if (onError) {
-            onError(error.message);
-        }
-    }
+// Создайте асинхронный action creator для обновления задачи
+export const updateTask = (taskData) => async dispatch => {
+    dispatch(createAction(UPDATE_TASK_REQUEST));
+    return API_ADMIN.patch(`tasks`, taskData) // Возвращает промис напрямую
+        .then(({ data }) => {
+            dispatch(createAction(UPDATE_TASK_SUCCESS, data));
+            return data; // Разрешение промиса с данными
+        })
+        .catch(error => {
+            dispatch(createAction(UPDATE_TASK_FAILURE, error.message));
+            throw error; // Передача ошибки дальше в цепочку промиса
+        });
 };

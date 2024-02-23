@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Tasks;
+namespace App\Http\Requests\Client\Tasks;
 
 use App\Enums\TaskStatusesEnum;
 use App\Http\Requests\ApiFormRequest;
+use App\Models\Task;
 
 class TasksListTasksRequest extends ApiFormRequest {
 
@@ -14,10 +15,14 @@ class TasksListTasksRequest extends ApiFormRequest {
      */
     public function rules(): array
     {
+        $fields = implode(',', (new Task())->getFillable());
+
+        $statuses = implode(',', TaskStatusesEnum::getValues());
+
         return [
-            'sort' => 'in:username,email',
+            'sort' => "in:$fields",
             'order' => 'in:asc,desc',
-            'status' => 'sometimes|in:' . implode(',', TaskStatusesEnum::getValues()),
+            'status' => "sometimes|in:$statuses",
             'pageSize' => 'sometimes|integer|min:1'
         ];
     }

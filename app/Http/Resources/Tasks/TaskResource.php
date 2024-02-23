@@ -35,7 +35,8 @@ class TaskResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'text' => $this->text,
-            'status' => TaskStatusesEnum::getDescription($this->status),
+            'status' => $this->status,
+            'status_display_text' => TaskStatusesEnum::getDescription($this->status),
             'edited_by_admin' => $this->edited_by_admin,
             'created_at' => $this->created_at->format('Y-m-d H:i'),
             'updated_at' => $updatedAtFormatted

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import API from "@~utils/axios";
+import {API} from "@~utils/axios";
 import {useDispatch} from "react-redux";
 import {setUser} from "@~modules/auth/actions";
 

@@ -1,24 +1,16 @@
-const TaskFilters = ({ selectedStatus, onStatusChange, onSortChange, statuses }) => {
+import React from "react";
+import SelectField from "@~components/form/SelectField";
+
+const TaskFilters = ({ selectedStatus, onStatusChange, statuses }) => {
     return (
         <div className="mb-4">
-            <select
+            <SelectField
+                label="Статус задачи"
+                name="status"
                 value={selectedStatus}
                 onChange={onStatusChange}
-                className="mb-4 p-2 border rounded"
-            >
-                <option value="">Все статусы</option>
-                {statuses.map((status) => (
-                    <option key={status.value} value={status.value}>
-                        {status.label}
-                    </option>
-                ))}
-            </select>
-            <button onClick={() => onSortChange('username')} className="mx-2">
-                Сортировка по имени
-            </button>
-            <button onClick={() => onSortChange('email')} className="mx-2">
-                Сортировка по email
-            </button>
+                options={[{ value: '', label: 'Все статусы' }, ...statuses]}
+            />
         </div>
     );
 };

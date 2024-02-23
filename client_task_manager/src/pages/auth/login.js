@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react';
 import LoginForm from "@~components/auth/LoginForm";
 import {useRouter} from "next/router";
 const LoginPage = () => {

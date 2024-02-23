@@ -1,17 +1,12 @@
 <?php
 
 use App\Http\Responses\ResponseBuilder;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\{
-    LoginController,
-};
 
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 
-    Route::post('login', LoginController::class);
+    Route::post('login', 'LoginController');
 
-    Route::post('logout', function (Request $request) {
+    Route::post('logout', function (\Illuminate\Http\Request $request) {
         $request->user()->currentAccessToken()->delete();
 
         return ResponseBuilder::success([], 'Вы успешно вышли из системы');

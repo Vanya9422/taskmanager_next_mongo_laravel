@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasks, fetchStatuses } from '@~modules/tasks/actions';
 import TaskTable from "@~components/tasks/TaskTable";
-import Pagination from "@~components/tasks/Pagination";
+import Pagination from "@~components/form/Pagination";
 import TaskFilters from "@~components/tasks/TaskFilters";
 
 import {
@@ -50,17 +50,15 @@ const TaskList = () => {
 
     return (
         <div className="bg-white p-4 shadow rounded-lg">
-            {loading && <p className="text-center text-gray-600">Загрузка...</p>}
             {error && <p className="text-center text-red-500">Ошибка: {error}</p>}
-            {!loading && !error && (
+            {!error && (
                 <>
                     <TaskFilters
                         statuses={statuses}
                         selectedStatus={selectedStatus}
                         onStatusChange={handleStatusChange}
-                        onSortChange={handleSortChange}
                     />
-                    <TaskTable tasks={tasks} />
+                    <TaskTable tasks={tasks} loading={loading} onSortChange={handleSortChange}/>
                     <Pagination
                         currentPage={currentPage}
                         onPreviousClick={() => setCurrentPage(currentPage - 1)}

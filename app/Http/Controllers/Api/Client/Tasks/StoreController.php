@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Tasks;
+namespace App\Http\Controllers\Api\Client\Tasks;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tasks\StoreTaskRequest;
+use App\Http\Requests\Client\Tasks\StoreTaskRequest;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Http\Responses\ResponseBuilder;
 use App\Repository\Tasks\TaskRepositoryInterface;
@@ -28,7 +28,7 @@ class StoreController extends Controller
 
             return new TaskResource($result);
         } catch (\Exception $e) {
-            return ResponseBuilder::serverError('Произошла ошибка при сохранении результата.');
+            return ResponseBuilder::serverError('Произошла ошибка при сохранении задачи.');
         }
     }
 }

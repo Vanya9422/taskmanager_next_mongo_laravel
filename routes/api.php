@@ -17,5 +17,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-include base_path('routes/group/auth.php');
-include base_path('routes/group/client/tasks.php');
+//include base_path('routes/group/auth.php');
+//include base_path('routes/group/client/tasks.php');
+
+Helpers::findFiles(__DIR__ . '/group');

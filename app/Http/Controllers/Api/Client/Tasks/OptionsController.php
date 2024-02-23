@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Tasks;
+namespace App\Http\Controllers\Api\Client\Tasks;
 
 use App\Enums\TaskStatusesEnum;
 use App\Http\Controllers\Controller;

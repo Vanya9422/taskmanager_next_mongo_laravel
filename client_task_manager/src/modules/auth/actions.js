@@ -1,5 +1,5 @@
 // auth/actions.js
-import API from "@~utils/axios"
+import {API} from "@~utils/axios"
 
 // Типы действий для управления состоянием аутентификации
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';

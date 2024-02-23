@@ -1,14 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Tasks\{
-    OptionsController,
-    ListController,
-    StoreController,
-};
-
-Route::group(['prefix' => 'tasks'], function () {
-
-    Route::options('/', OptionsController::class);
-    Route::get('/', ListController::class);
-    Route::post('/', StoreController::class);
+Route::group([
+    'prefix' => 'tasks',
+    'namespace' => 'Client\Tasks'
+], function () {
+    Route::options('/', 'OptionsController');
+    Route::get('/', 'ListController');
+    Route::post('/', 'StoreController');
 });
