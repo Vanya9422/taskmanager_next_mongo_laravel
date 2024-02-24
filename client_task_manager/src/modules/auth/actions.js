@@ -9,6 +9,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 export const LOGOUT = 'LOGOUT';
+export const SET_CSRF_TOKEN = 'SET_CSRF_TOKEN';
 
 // Вспомогательная функция для создания объектов действий
 const createAction = (type, payload = {}) => ({ type, ...payload });
@@ -74,5 +75,15 @@ export const fetchUserData = (token) => async (dispatch) => {
     } catch (error) {
         console.error(error);
         throw error;
+    }
+};
+
+export const fetchCsrfToken = () => async (dispatch) => {
+    try {
+        const {data: {data}} = await API.get('/3d4bf18b866552d669a3c44c6e46e204');
+
+        dispatch(createAction(SET_CSRF_TOKEN, {csrf_token: data}));
+    } catch (error) {
+        console.error('Ошибка при получении CSRF токена:', error);
     }
 };

@@ -55,9 +55,10 @@ export const fetchStatuses = () => async dispatch => {
 };
 
 // Асинхронный создатель действий для создания новой задачи
-export const createTask = (taskData) => async dispatch => {
+export const createTask = (taskData) => async (dispatch) => {
     dispatch(createAction(CREATE_TASK_REQUEST));
-    return API.post('tasks', taskData) // Возвращаем промис напрямую
+
+    return API.post('tasks', taskData)
         .then(({ data }) => {
             dispatch(createAction(CREATE_TASK_SUCCESS, { payload: data }));
             return data; // Разрешаем промис с данными для дальнейшего использования

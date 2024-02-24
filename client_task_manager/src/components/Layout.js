@@ -2,9 +2,12 @@
 import React from 'react';
 import Navbar from "@~components/common/Navbar";
 import useAuth from "@~hooks/useAuth";
+import useCsrfToken from "@~hooks/useCsrfToken";
 
 export default function Layout({ children }) {
     useAuth()
+    useCsrfToken()
+
     return (
         <>
             <Navbar />
