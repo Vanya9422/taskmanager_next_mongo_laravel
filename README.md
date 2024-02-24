@@ -40,7 +40,7 @@ php artisan key:generate
 # Настройте параметры подключения к базе данных в .env
 
 # Запуск миграций
-php artisan db --seed
+php artisan db:seed
 
 # Запуск сервера
 php artisan serve
