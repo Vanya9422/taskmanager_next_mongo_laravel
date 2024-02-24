@@ -36,7 +36,7 @@ export const fetchTasks = (params = {}) => async dispatch => {
     dispatch(createAction(FETCH_TASKS_REQUEST));
     try {
         const queryString = filterParams(params);
-        const { data: { data } } = await API.get(`tasks${queryString ? `?${queryString}` : ''}`);
+        const { data: { data } } = await API.get(`/tasks${queryString ? `?${queryString}` : ''}`);
         dispatch(createAction(FETCH_TASKS_SUCCESS, { payload: data }));
     } catch (error) {
         dispatch(createAction(FETCH_TASKS_FAILURE, { payload: error.message }));
@@ -71,7 +71,7 @@ export const createTask = (taskData) => async dispatch => {
 // Создайте асинхронный action creator для обновления задачи
 export const updateTask = (taskData) => async dispatch => {
     dispatch(createAction(UPDATE_TASK_REQUEST));
-    return API_ADMIN.patch(`tasks`, taskData) // Возвращает промис напрямую
+    return API_ADMIN.patch(`/tasks`, taskData) // Возвращает промис напрямую
         .then(({ data }) => {
             dispatch(createAction(UPDATE_TASK_SUCCESS, data));
             return data; // Разрешение промиса с данными

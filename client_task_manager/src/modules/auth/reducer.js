@@ -7,7 +7,6 @@ const initialState = {
     isAuthenticated: false,
     error: null,
     user: null,
-    token: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -21,15 +20,14 @@ export default function authReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                user: action.payload.user,
-                token: action.payload.token,
+                user: action.user,
                 error: null,
                 isAuthenticated: true,
             };
         case SET_USER_DETAILS:
             return {
                 ...state,
-                user: action.payload,
+                user: action.user,
                 isAuthenticated: true,
             };
         case LOGIN_FAILURE:
@@ -42,7 +40,6 @@ export default function authReducer(state = initialState, action) {
             return {
                 ...state,
                 user: null,
-                token: null,
                 isAuthenticated: false,
             };
         default:

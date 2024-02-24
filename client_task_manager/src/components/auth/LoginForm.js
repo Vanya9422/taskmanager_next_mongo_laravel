@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { login } from '@~modules/auth/actions';
 import {useRouter} from "next/router";
 

@@ -1,11 +1,5 @@
 import LoginForm from "@~components/auth/LoginForm";
-import {useRouter} from "next/router";
 const LoginPage = () => {
-    const router = useRouter();
-
-    if (localStorage.getItem('token')) {
-        router.push('/dashboard');
-    }
 
     return (
         <>
