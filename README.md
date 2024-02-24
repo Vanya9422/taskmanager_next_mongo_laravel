@@ -24,7 +24,7 @@
 
 ```bash
 # Клонирование репозитория
-git clone https://github.com/Vanya9422/taskmanager_next_mongo_laravel.git && cd <папка_backend>
+git clone https://github.com/Vanya9422/taskmanager_next_mongo_laravel.git && cd taskmanager_next_mongo_laravel
 
 # Установка зависимостей
 composer install
