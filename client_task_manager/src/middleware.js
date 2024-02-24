@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function middleware(req) {
     const { pathname } = req.nextUrl;
-    const token = req.cookies.get('token').value;
+    const token = req.cookies.get('token')?.value;
 
     const isLoginPage = pathname.startsWith('/auth/login');
 
@@ -14,11 +14,11 @@ export async function middleware(req) {
     }
 
     // Массив путей, которые доступны без аутентификации
-    const publicPaths = ['/', '/tasks/*', '/auth*'];
-    const isPublicPath = publicPaths.some(path =>
-        pathname === path ||
-        (path.endsWith('/*') && pathname.startsWith(path.replace('/*', '')))
-    );
+    const publicPaths = ['/', '/tasks/*', '/auth/*'];
+    const isPublicPath = publicPaths.some(path => {
+        const regex = new RegExp(`^${path.replace('*', '.*')}$`);
+        return regex.test(pathname);
+    });
 
     if (isPublicPath) return NextResponse.next();
 
