@@ -74,7 +74,6 @@ export const fetchUserData = (token) => async (dispatch) => {
         dispatch(setUser({user: response.data}));
     } catch (error) {
         console.error(error);
-        throw error;
     }
 };
 

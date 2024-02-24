@@ -45,11 +45,6 @@ const tasksReducer = (state = initialState, action) => {
                 error: action.payload,
             };
         case CREATE_TASK_SUCCESS:
-            return {
-                ...state,
-                tasks: [...state.tasks, action.payload], // Добавляем новую задачу в массив задач
-                loading: false,
-            };
         default:
             return state;
     }

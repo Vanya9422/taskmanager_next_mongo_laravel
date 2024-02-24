@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Запускаем сидер для заполнения данными
-        $this->call(
+        $this->call([
             AdminSeeder::class,
             TasksTableSeeder::class,
-        );
+        ]);
     }
 }
